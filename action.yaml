@@ -50,4 +50,4 @@ runs:
         INPUT_EXCLUDE-WORKFLOW-INITIATOR-AS-APPROVER: "${{ inputs.exclude-workflow-initiator-as-approver }}"
         INPUT_ADDITIONAL-APPROVED-WORDS: "${{ inputs.additional-approved-words }}"
         INPUT_ADDITIONAL-DENIED-WORDS: "${{ inputs.additional-denied-words }}"
-      run: /usr/local/bin/manual-approval
+      run: exec /usr/local/bin/manual-approval
