@@ -154,11 +154,8 @@ For `uses`, this should point to your repo and dev branch.
 
 ### Create a release
 
-1. Build the new version's image: `$ VERSION=1.7.0 make build`
-1. Push the new image: `$ VERSION=1.7.0 make push`
-1. Create a release branch and modify `action.yaml` to point to the new image
-1. Open and merge a PR to add these changes to the default branch
-1. Make sure to fetch the new changes into your local repo: `$ git checkout main && git fetch origin && git merge origin main`
-1. Delete the `v1` tag locally and remotely: `$ git tag -d v1 && git push --delete origin v1`
-1. Create and push new tags: `$ git tag v1.7.0 && git tag v1 && git push origin --tags`
-1. Create the GitHub project release
+1. Build new binary version: `CGO_ENABLED=0 go build -o manual-approval-x86_64-linux .`
+
+2. Update [action.yaml](https://github.com/saymine/gha-manual-approval/blob/main/action.yaml#L38-L40) file for pull binary from new release version
+
+3. Create new release at [repository releases page](https://github.com/saymine/gha-manual-approval/releases/new). Add release title, describe release and attach new binary that you built at step 1
