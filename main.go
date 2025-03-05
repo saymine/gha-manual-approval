@@ -161,12 +161,13 @@ func writeOutputFile(apprv *approvalEnvironment) {
 	defer file.Close()
 
 	encoder := json.NewEncoder(file)
-	encoder.SetIndent("", "  ") // Pretty-print JSON
 	err = encoder.Encode(output)
 	if err != nil {
 		fmt.Println("Error encoding JSON output", err)
 		return
 	}
+
+	fmt.Println("Output json file written!")
 }
 
 func main() {

@@ -58,7 +58,10 @@ runs:
         exec ./manual-approval-x86_64-linux
 
         if [[ -f "output.json" ]]; then
+          echo "output json file found"
+
           ISSUE_URL=$(jq -r '.issueUrl' output.json)
+          echo "Issue url: $ISSUE_URL"
           echo "issue_url=$ISSUE_URL" >> $GITHUB_OUTPUT
         fi
 

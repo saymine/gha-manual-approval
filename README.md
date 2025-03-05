@@ -154,8 +154,8 @@ For `uses`, this should point to your repo and dev branch.
 
 ### Create a release
 
-1. Build new binary version: `CGO_ENABLED=0 go build -o manual-approval-x86_64-linux .`
+1. Build new binary version: `GOOS=linux GOARCH=amd64 CGO_ENABLED=0 go build -o manual-approval-x86_64-linux .`
 
 2. Update [action.yaml](https://github.com/saymine/gha-manual-approval/blob/main/action.yaml#L38-L40) file for pull binary from new release version
 
-3. Create new release at [repository releases page](https://github.com/saymine/gha-manual-approval/releases/new). Add release title, describe release and attach new binary that you built at step 1
+3. Create new release at [repository releases page](https://github.com/saymine/gha-manual-approval/releases/new). Add release title, describe release and attach new binary that you built at step 
