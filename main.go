@@ -2,6 +2,7 @@ package main
 
 import (
 	"context"
+	"encoding/json"
 	"fmt"
 	"os"
 	"os/signal"
@@ -143,6 +144,31 @@ func validateInput() error {
 	return nil
 }
 
+type output struct {
+	IssueUrl string `json:"issueUrl"`
+}
+
+func writeOutputFile(apprv *approvalEnvironment) {
+	output := output{
+		IssueUrl: apprv.approvalIssue.GetHTMLURL(),
+	}
+
+	file, err := os.Create("output.json")
+	if err != nil {
+		fmt.Println("Error creating output file:", err)
+		return
+	}
+	defer file.Close()
+
+	encoder := json.NewEncoder(file)
+	encoder.SetIndent("", "  ") // Pretty-print JSON
+	err = encoder.Encode(output)
+	if err != nil {
+		fmt.Println("Error encoding JSON output", err)
+		return
+	}
+}
+
 func main() {
 	if err := validateInput(); err != nil {
 		fmt.Printf("%v\n", err)
@@ -200,6 +226,7 @@ func main() {
 
 	select {
 	case exitCode := <-commentLoopChannel:
+		writeOutputFile(apprv)
 		os.Exit(exitCode)
 	case <-killSignalChannel:
 		handleInterrupt(ctx, client, apprv)
