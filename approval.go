@@ -85,10 +85,12 @@ Respond %s to continue workflow or %s to cancel.`,
 		a.issueApprovers,
 		issueBody,
 	)
+	labels := []string{"release"}
 	a.approvalIssue, _, err = a.client.Issues.Create(ctx, a.repoOwner, a.repo, &github.IssueRequest{
 		Title:     &issueTitle,
 		Body:      &issueBody,
 		Assignees: &a.issueApprovers,
+		Labels:    &labels,
 	})
 	if err != nil {
 		return err

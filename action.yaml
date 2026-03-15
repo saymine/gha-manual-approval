@@ -39,7 +39,7 @@ runs:
     - name: "setup: download binary"
       shell: bash
       run: |
-        curl -OL https://github.com/saymine/gha-manual-approval/releases/download/v1.9.4/manual-approval-x86_64-linux
+        curl -OL https://github.com/saymine/gha-manual-approval/releases/download/v1.9.5/manual-approval-x86_64-linux
         chmod +x ./manual-approval-x86_64-linux
 
     - name: "run: manual approval"
