@@ -158,4 +158,15 @@ For `uses`, this should point to your repo and dev branch.
 
 2. Update [action.yaml](https://github.com/saymine/gha-manual-approval/blob/main/action.yaml#L38-L40) file for pull binary from new release version
 
-3. Create new release at [repository releases page](https://github.com/saymine/gha-manual-approval/releases/new). Add release title, describe release and attach new binary that you built at step 
+3. Create new release at [repository releases page](https://github.com/saymine/gha-manual-approval/releases/new). Add release title, describe release and attach new binary that you built at step 1.
+
+4. Move the `v1` floating tag to the new release tag:
+
+```bash
+git tag -d v1
+git push origin :refs/tags/v1
+git tag v1 <new-release-tag>
+git push origin v1
+```
+
+This keeps `uses: saymine/gha-manual-approval@v1` pointing to the latest v1.x release. 
